@@ -34,7 +34,7 @@ export default function LoginScreen() {
   return (
     <SafeAreaView className="flex-1 bg-white p-6">
       {/* Role Toggle */}
-      <View className="flex-row bg-gray-100 rounded-lg p-1 mb-8">
+      <View className="flex-row bg-gray-100 rounded-lg p-1 mb-8 mt-10">
         <TouchableOpacity
           className={`flex-1 py-3 rounded-md items-center ${role === "USER" ? "bg-white shadow-sm" : ""}`}
           onPress={() => setRole("USER")}
@@ -63,7 +63,7 @@ export default function LoginScreen() {
 
       <View className="space-y-4">
         <TextInput
-          className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-base"
+          className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-base mb-4"
           placeholder={
             role === "USER" ? "Email address" : "Responder ID / Phone"
           }

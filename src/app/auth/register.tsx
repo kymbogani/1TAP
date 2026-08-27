@@ -41,7 +41,7 @@ export default function RegisterScreen() {
 
   return (
     <SafeAreaView className="flex-1 bg-white">
-      <ScrollView contentContainerStyle={{ padding: 24 }}>
+      <ScrollView contentContainerStyle={{ padding: 24, paddingTop: 40 }}>
         {/* Role Toggle */}
         <View className="flex-row bg-gray-100 rounded-lg p-1 mb-8">
           <TouchableOpacity
@@ -72,7 +72,7 @@ export default function RegisterScreen() {
 
         <View className="space-y-4">
           <TextInput
-            className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-base"
+            className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-base mb-4"
             placeholder={role === "USER" ? "Full Name" : "Team/Unit Name"}
             value={name}
             onChangeText={setName}
@@ -80,7 +80,7 @@ export default function RegisterScreen() {
 
           {role === "USER" && (
             <TextInput
-              className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-base"
+              className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-base mb-4"
               placeholder="Email Address"
               value={email}
               onChangeText={setEmail}
@@ -90,7 +90,7 @@ export default function RegisterScreen() {
           )}
 
           <TextInput
-            className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-base"
+            className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-base mb-4"
             placeholder="Phone Number (09XXXXXXXXX)"
             value={phone}
             onChangeText={setPhone}
@@ -111,6 +111,15 @@ export default function RegisterScreen() {
           className="bg-red-600 rounded-full py-4 items-center mt-8"
         >
           <Text className="text-white font-bold text-base">Sign Up</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={() => router.push("/auth/login")}
+          className="mt-4 items-center"
+        >
+          <Text className="text-gray-600 font-bold">
+            Already have an account? Login
+          </Text>
         </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
