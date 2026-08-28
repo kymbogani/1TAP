@@ -12,8 +12,7 @@ import {
 } from "react-native";
 import FormSheet from "../../components/FormSheet";
 import HeroHeader from "../../components/HeroHeader";
-import { supabase } from "../lib/supabase";
-
+import { supabase } from "../../lib/supabase";
 export default function LoginScreen() {
   const router = useRouter();
   const [email, setEmail] = useState("");
