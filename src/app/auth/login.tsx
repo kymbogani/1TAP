@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { useState } from "react";
 import {
   KeyboardAvoidingView,
   Platform,
@@ -9,63 +9,42 @@ import {
 import FormSheet from "../../components/FormSheet";
 import HeroHeader from "../../components/HeroHeader";
 
-interface State {
-  email: string;
-  password: string;
-}
+export default function LoginScreen() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-export default class LoginScreen extends Component<{}, State> {
-  constructor(props: {}) {
-    super(props);
-    this.state = {
-      email: "",
-      password: "",
-    };
-  }
-
-  handleEmailChange = (text: string) => {
-    this.setState({ email: text });
+  const handleLoginPress = () => {
+    console.log("Login Attempt:", { email, password });
   };
 
-  handlePasswordChange = (text: string) => {
-    this.setState({ password: text });
-  };
-
-  handleLoginPress = () => {
-    console.log("Login Attempt:", this.state);
-  };
-
-  render() {
-    const { email, password } = this.state;
-
-    return (
-      <View style={styles.container}>
-        <KeyboardAvoidingView
-          style={styles.keyboardAvoid}
-          behavior={Platform.OS === "ios" ? "padding" : "height"}
+  return (
+    <View style={styles.container}>
+      <KeyboardAvoidingView
+        style={styles.keyboardAvoid}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+      >
+        <ScrollView
+          contentContainerStyle={styles.scrollContent}
+          bounces={false}
+          showsVerticalScrollIndicator={false}
+          keyboardShouldPersistTaps="handled"
         >
-          <ScrollView
-            contentContainerStyle={styles.scrollContent}
-            bounces={false}
-            showsVerticalScrollIndicator={false}
-          >
-            <HeroHeader />
-            <FormSheet
-              emailValue={email}
-              passwordValue={password}
-              onEmailChange={this.handleEmailChange}
-              onPasswordChange={this.handlePasswordChange}
-              onLoginPress={this.handleLoginPress}
-            />
-          </ScrollView>
-        </KeyboardAvoidingView>
-      </View>
-    );
-  }
+          <HeroHeader />
+          <FormSheet
+            emailValue={email}
+            passwordValue={password}
+            onEmailChange={setEmail}
+            onPasswordChange={setPassword}
+            onLoginPress={handleLoginPress}
+          />
+        </ScrollView>
+      </KeyboardAvoidingView>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: "#FCFCFC" },
   keyboardAvoid: { flex: 1 },
-  scrollContent: { flexGrow: 1 },
+  scrollContent: { flexGrow: 1, paddingBottom: 40 },
 });

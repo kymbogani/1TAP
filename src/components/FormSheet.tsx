@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { useRouter } from "expo-router";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import CustomTextInput from "./CustomTextInput";
 import PrimaryButton from "./PrimaryButton";
@@ -12,77 +12,74 @@ interface Props {
   onLoginPress: () => void;
 }
 
-export default class FormSheet extends Component<Props> {
-  render() {
-    const {
-      emailValue,
-      passwordValue,
-      onEmailChange,
-      onPasswordChange,
-      onLoginPress,
-    } = this.props;
+export default function FormSheet({
+  emailValue,
+  passwordValue,
+  onEmailChange,
+  onPasswordChange,
+  onLoginPress,
+}: Props) {
+  const router = useRouter();
 
-    return (
-      <View style={styles.sheetContainer}>
-        <Text style={styles.welcomeText}>Welcome Back!</Text>
-        <Text style={styles.subtitleText}>Login to continue</Text>
+  return (
+    <View style={styles.sheetContainer}>
+      <Text style={styles.welcomeText}>Welcome Back!</Text>
+      <Text style={styles.subtitleText}>Login to continue</Text>
 
-        <CustomTextInput
-          label="Email"
-          iconName="mail"
-          placeholder="Enter your email"
-          value={emailValue}
-          onChangeText={onEmailChange}
-          isPassword={false}
-        />
+      <CustomTextInput
+        label="Email"
+        iconName="mail"
+        placeholder="Enter your email"
+        value={emailValue}
+        onChangeText={onEmailChange}
+        isPassword={false}
+      />
 
-        <CustomTextInput
-          label="Password"
-          iconName="lock"
-          placeholder="Enter your password"
-          value={passwordValue}
-          onChangeText={onPasswordChange}
-          isPassword={true}
-        />
+      <CustomTextInput
+        label="Password"
+        iconName="lock"
+        placeholder="Enter your password"
+        value={passwordValue}
+        onChangeText={onPasswordChange}
+        isPassword={true}
+      />
 
-        <TouchableOpacity
-          style={styles.forgotPasswordContainer}
-          activeOpacity={0.7}
-        >
-          <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
-        </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.forgotPasswordContainer}
+        activeOpacity={0.7}
+      >
+        <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
+      </TouchableOpacity>
 
-        <PrimaryButton title="Login" onPress={onLoginPress} />
+      <PrimaryButton title="Login" onPress={onLoginPress} />
 
-        <View style={styles.dividerRow}>
-          <View style={styles.dividerLine} />
-          <Text style={styles.dividerText}>OR</Text>
-          <View style={styles.dividerLine} />
-        </View>
-
-        <View style={styles.socialRow}>
-          <SocialButton
-            provider="Google"
-            iconName="google"
-            iconColor="#DB4437"
-          />
-          <SocialButton
-            provider="Facebook"
-            iconName="facebook-f"
-            iconColor="#4267B2"
-          />
-          <SocialButton provider="Apple" iconName="apple" iconColor="#000000" />
-        </View>
-
-        <View style={styles.footerRow}>
-          <Text style={styles.footerText}>Don't have an account? </Text>
-          <TouchableOpacity activeOpacity={0.7}>
-            <Text style={styles.footerAction}>Sign Up</Text>
-          </TouchableOpacity>
-        </View>
+      <View style={styles.dividerRow}>
+        <View style={styles.dividerLine} />
+        <Text style={styles.dividerText}>OR</Text>
+        <View style={styles.dividerLine} />
       </View>
-    );
-  }
+
+      <View style={styles.socialRow}>
+        <SocialButton provider="Google" iconName="google" iconColor="#DB4437" />
+        <SocialButton
+          provider="Facebook"
+          iconName="facebook-f"
+          iconColor="#4267B2"
+        />
+        <SocialButton provider="Apple" iconName="apple" iconColor="#000000" />
+      </View>
+
+      <View style={styles.footerRow}>
+        <Text style={styles.footerText}>Don't have an account? </Text>
+        <TouchableOpacity
+          activeOpacity={0.7}
+          onPress={() => router.push("/auth/register")}
+        >
+          <Text style={styles.footerAction}>Sign Up</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
