@@ -71,6 +71,15 @@ export default function RegisterScreen() {
       alert("Please agree to the Terms and Privacy Policy.");
       return;
     }
+
+    // Ensure the mobile number is exactly 11 digits
+    if (mobileNumber.length !== 11) {
+      alert(
+        "Please enter a valid 11-digit Philippine mobile number (e.g., 09123456789).",
+      );
+      return;
+    }
+
     console.log("Registering as:", role);
   };
 
@@ -125,7 +134,7 @@ export default function RegisterScreen() {
           />
           <TextInput
             className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-base mb-4"
-            placeholder="Mobile Number"
+            placeholder="Mobile Number (e.g., 09123456789)"
             value={mobileNumber}
             onChangeText={(text) =>
               setMobileNumber(text.replace(/[^0-9]/g, ""))
