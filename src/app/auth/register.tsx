@@ -39,23 +39,27 @@ export default function RegisterScreen() {
       alert("Please agree to the Terms and Privacy Policy.");
       return;
     }
-    // Add your registration logic here
     console.log("Registering as:", role);
+    // TODO: Add actual API registration logic here
   };
 
   return (
     <SafeAreaView className="flex-1 bg-white">
       <ScrollView
+        className="flex-1"
         contentContainerStyle={{
+          flexGrow: 1,
           padding: 24,
           paddingTop: 40,
-          paddingBottom: 60,
+          paddingBottom: 100,
         }}
+        showsVerticalScrollIndicator={true}
+        keyboardShouldPersistTaps="handled"
       >
         {/* Role Toggle */}
         <View className="flex-row bg-gray-50 border border-gray-200 rounded-lg p-1 mb-8">
           <TouchableOpacity
-            className={`flex-1 py-3 rounded-md items-center ${role === "USER" ? "bg-white shadow-sm border border-gray-100" : ""}`}
+            className={`flex-1 py-3 rounded-md items-center ${role === "USER" ? "bg-white shadow-sm border border-gray-200" : ""}`}
             onPress={() => setRole("USER")}
           >
             <Text
@@ -65,7 +69,7 @@ export default function RegisterScreen() {
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            className={`flex-1 py-3 rounded-md items-center ${role === "RESPONDER" ? "bg-white shadow-sm border border-gray-100" : ""}`}
+            className={`flex-1 py-3 rounded-md items-center ${role === "RESPONDER" ? "bg-white shadow-sm border border-gray-200" : ""}`}
             onPress={() => setRole("RESPONDER")}
           >
             <Text
@@ -83,20 +87,20 @@ export default function RegisterScreen() {
         <View className="space-y-4">
           {/* Shared Fields */}
           <TextInput
-            className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-base"
+            className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-base mb-4"
             placeholder="Full Name"
             value={fullName}
             onChangeText={setFullName}
           />
           <TextInput
-            className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-base"
+            className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-base mb-4"
             placeholder="Mobile Number"
             value={mobileNumber}
             onChangeText={setMobileNumber}
             keyboardType="phone-pad"
           />
           <TextInput
-            className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-base"
+            className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-base mb-4"
             placeholder="Email Address"
             value={email}
             onChangeText={setEmail}
@@ -104,14 +108,14 @@ export default function RegisterScreen() {
             autoCapitalize="none"
           />
           <TextInput
-            className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-base"
+            className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-base mb-4"
             placeholder="Password"
             secureTextEntry
             value={password}
             onChangeText={setPassword}
           />
           <TextInput
-            className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-base mb-2"
+            className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-base mb-4"
             placeholder="Confirm Password"
             secureTextEntry
             value={confirmPassword}
@@ -122,19 +126,18 @@ export default function RegisterScreen() {
           {role === "USER" && (
             <>
               <TextInput
-                className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-base"
+                className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-base mb-4"
                 placeholder="Date of Birth (MM / DD / YYYY)"
                 value={dob}
                 onChangeText={setDob}
               />
               <TextInput
-                className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-base"
+                className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-base mb-4"
                 placeholder="Home Address"
                 value={address}
                 onChangeText={setAddress}
               />
-              {/* Dropdown Placeholder */}
-              <TouchableOpacity className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 flex-row justify-between items-center">
+              <TouchableOpacity className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 flex-row justify-between items-center mb-4">
                 <Text
                   className={
                     barangay ? "text-black" : "text-gray-400 text-base"
@@ -145,13 +148,13 @@ export default function RegisterScreen() {
                 <Text className="text-gray-400">▼</Text>
               </TouchableOpacity>
               <TextInput
-                className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-base"
+                className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-base mb-4"
                 placeholder="City / Municipality"
                 value={city}
                 onChangeText={setCity}
               />
               <TextInput
-                className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-base"
+                className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-base mb-4"
                 placeholder="Province"
                 value={province}
                 onChangeText={setProvince}
@@ -162,27 +165,25 @@ export default function RegisterScreen() {
           {/* Responder Fields */}
           {role === "RESPONDER" && (
             <>
-              {/* Dropdown Placeholder */}
-              <TouchableOpacity className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 flex-row justify-between items-center">
+              <TouchableOpacity className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 flex-row justify-between items-center mb-4">
                 <Text className="text-black text-base">{responderType}</Text>
                 <Text className="text-gray-400">▼</Text>
               </TouchableOpacity>
 
               <TextInput
-                className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-base"
+                className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-base mb-4"
                 placeholder="Organization / Station"
                 value={organization}
                 onChangeText={setOrganization}
               />
               <TextInput
-                className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-base"
+                className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-base mb-4"
                 placeholder="Badge / Employee ID"
                 value={badgeId}
                 onChangeText={setBadgeId}
               />
 
-              {/* Dropdown Placeholder */}
-              <TouchableOpacity className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 flex-row justify-between items-center">
+              <TouchableOpacity className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 flex-row justify-between items-center mb-4">
                 <Text
                   className={
                     assignedArea ? "text-black" : "text-gray-400 text-base"
@@ -193,7 +194,6 @@ export default function RegisterScreen() {
                 <Text className="text-gray-400">▼</Text>
               </TouchableOpacity>
 
-              {/* Upload Button Placeholder */}
               <TouchableOpacity className="border border-dashed border-gray-400 rounded-xl px-4 py-4 items-center bg-gray-50 mt-2">
                 <Text className="text-gray-600 font-medium">
                   Upload Verification Document
@@ -218,21 +218,24 @@ export default function RegisterScreen() {
           </Text>
         </TouchableOpacity>
 
+        {/* Submit Button */}
         <TouchableOpacity
           onPress={handleRegister}
-          className="bg-red-600 rounded-full py-4 items-center mt-6"
+          activeOpacity={0.8}
+          className="bg-red-600 rounded-xl py-4 items-center mt-6 shadow-sm"
         >
-          <Text className="text-white font-bold text-base">
-            {role === "USER" ? "CREATE ACCOUNT" : "SUBMIT REGISTRATION"}
+          <Text className="text-white font-bold text-lg">
+            {role === "USER" ? "Create Account" : "Submit Registration"}
           </Text>
         </TouchableOpacity>
 
+        {/* Back to Login */}
         <TouchableOpacity
           onPress={() => router.push("/auth/login")}
-          className="mt-6 items-center"
+          className="mt-8 items-center pb-8"
         >
-          <Text className="text-gray-600 font-bold">
-            Already have an account? Login
+          <Text className="text-gray-600 font-bold text-base">
+            Already have an account? <Text className="text-red-600">Login</Text>
           </Text>
         </TouchableOpacity>
       </ScrollView>
