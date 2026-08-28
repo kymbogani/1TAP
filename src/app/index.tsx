@@ -7,11 +7,10 @@ export default function Index() {
 
   return (
     <SafeAreaView className="flex-1 bg-white">
-      <View className="flex-1 px-6 py-8 items-center justify-between">
+      <View className="flex-1 px-6 py-12 items-center justify-between max-w-lg mx-auto w-full">
         {/* --- TOP: Logo & Tagline --- */}
-        <View className="items-center mt-12">
+        <View className="items-center mt-8">
           <View className="flex-row items-center">
-            {/* Hand tap icon */}
             <MaterialCommunityIcons
               name="gesture-tap"
               size={48}
@@ -32,9 +31,8 @@ export default function Index() {
         </View>
 
         {/* --- MIDDLE: Illustration Placeholder --- */}
-        {/* If you have the exact image from your design, you can replace this View with an <Image /> component */}
-        <View className="items-center justify-center w-full flex-1">
-          {/* Decorative SOS Button representing the center of the illustration */}
+        {/* Added my-12 to create substantial space above and below the SOS button */}
+        <View className="items-center justify-center w-full my-12 flex-1">
           <View className="w-40 h-40 rounded-full bg-red-100 items-center justify-center">
             <View className="w-32 h-32 rounded-full bg-red-600 items-center justify-center shadow-xl shadow-red-500/50">
               <Text className="text-white text-4xl font-bold">SOS</Text>
@@ -43,8 +41,7 @@ export default function Index() {
         </View>
 
         {/* --- BOTTOM: Actions & Social Login --- */}
-        <View className="w-full">
-          {/* Login Button */}
+        <View className="w-full mb-4">
           <TouchableOpacity
             onPress={() => router.push("/auth/login")}
             className="bg-red-600 rounded-2xl py-4 items-center mb-4"
@@ -52,15 +49,13 @@ export default function Index() {
             <Text className="text-white font-bold text-lg">Login</Text>
           </TouchableOpacity>
 
-          {/* Sign Up Button */}
           <TouchableOpacity
             onPress={() => router.push("/auth/register")}
-            className="bg-white border border-gray-300 rounded-2xl py-4 items-center mb-8"
+            className="bg-white border border-gray-300 rounded-2xl py-4 items-center mb-10"
           >
             <Text className="text-gray-900 font-bold text-lg">Sign Up</Text>
           </TouchableOpacity>
 
-          {/* Divider */}
           <View className="items-center">
             <View className="flex-row items-center mb-6 w-4/5">
               <View className="flex-1 h-[1px] bg-gray-200" />
@@ -70,15 +65,14 @@ export default function Index() {
               <View className="flex-1 h-[1px] bg-gray-200" />
             </View>
 
-            {/* Social Icons */}
-            <View className="flex-row space-x-6">
-              <TouchableOpacity className="w-16 h-16 rounded-2xl border border-gray-200 items-center justify-center bg-white shadow-sm">
+            <View className="flex-row justify-center space-x-6 w-full">
+              <TouchableOpacity className="w-16 h-16 rounded-2xl border border-gray-200 items-center justify-center bg-white shadow-sm mx-3">
                 <FontAwesome5 name="google" size={24} color="#DB4437" />
               </TouchableOpacity>
-              <TouchableOpacity className="w-16 h-16 rounded-2xl border border-gray-200 items-center justify-center bg-white shadow-sm">
+              <TouchableOpacity className="w-16 h-16 rounded-2xl border border-gray-200 items-center justify-center bg-white shadow-sm mx-3">
                 <FontAwesome5 name="facebook" size={24} color="#4267B2" />
               </TouchableOpacity>
-              <TouchableOpacity className="w-16 h-16 rounded-2xl border border-gray-200 items-center justify-center bg-white shadow-sm">
+              <TouchableOpacity className="w-16 h-16 rounded-2xl border border-gray-200 items-center justify-center bg-white shadow-sm mx-3">
                 <MaterialCommunityIcons
                   name="email-outline"
                   size={26}
