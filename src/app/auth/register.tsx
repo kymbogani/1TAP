@@ -34,13 +34,44 @@ export default function RegisterScreen() {
   const [badgeId, setBadgeId] = useState("");
   const [assignedArea, setAssignedArea] = useState("");
 
+  const handleDobChange = (text: string) => {
+    // 1. Allow backspacing to work smoothly
+    if (text.length < dob.length) {
+      setDob(text);
+      return;
+    }
+
+    // 2. Remove any non-numeric characters
+    let cleaned = text.replace(/[^0-9]/g, "");
+
+    // 3. Smart Month Auto-Correct
+    if (cleaned.length === 1 && parseInt(cleaned) > 1) {
+      cleaned = "0" + cleaned;
+    }
+
+    // 4. Smart Day Auto-Correct
+    if (cleaned.length === 3 && parseInt(cleaned.charAt(2)) > 3) {
+      cleaned = cleaned.slice(0, 2) + "0" + cleaned.slice(2);
+    }
+
+    // 5. Auto-insert the slashes
+    let formatted = cleaned;
+    if (cleaned.length >= 3) {
+      formatted = `${cleaned.slice(0, 2)}/${cleaned.slice(2)}`;
+    }
+    if (cleaned.length >= 5) {
+      formatted = `${formatted.slice(0, 5)}/${cleaned.slice(4, 8)}`;
+    }
+
+    setDob(formatted);
+  };
+
   const handleRegister = async () => {
     if (!agreed) {
       alert("Please agree to the Terms and Privacy Policy.");
       return;
     }
     console.log("Registering as:", role);
-    // TODO: Add actual API registration logic here
   };
 
   return (
@@ -96,8 +127,11 @@ export default function RegisterScreen() {
             className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-base mb-4"
             placeholder="Mobile Number"
             value={mobileNumber}
-            onChangeText={setMobileNumber}
-            keyboardType="phone-pad"
+            onChangeText={(text) =>
+              setMobileNumber(text.replace(/[^0-9]/g, ""))
+            }
+            keyboardType="number-pad"
+            maxLength={11}
           />
           <TextInput
             className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-base mb-4"
@@ -127,9 +161,11 @@ export default function RegisterScreen() {
             <>
               <TextInput
                 className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-base mb-4"
-                placeholder="Date of Birth (MM / DD / YYYY)"
+                placeholder="Date of Birth (MM/DD/YYYY)"
                 value={dob}
-                onChangeText={setDob}
+                onChangeText={handleDobChange}
+                keyboardType="number-pad"
+                maxLength={10}
               />
               <TextInput
                 className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-base mb-4"
